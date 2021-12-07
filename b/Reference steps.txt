@@ -1,0 +1,21 @@
+==========================================================
+1. Creating virtual Environment
+
+
+mkdir btre_project
+py -3 -m venv .venv
+.venv\scripts\activate   (if popping error)
+
+(open terminal in admin and type)
+A) Set-ExecutionPolicy RemoteSigned
+(.venv\scripts\activate) type in vs code
+
+command to exit venv = deactivate
+
+B) Set-ExecutionPolicy Restricted
+
+
+==========================================================
+==========================================================
+==========================================================
+pip install Flask
