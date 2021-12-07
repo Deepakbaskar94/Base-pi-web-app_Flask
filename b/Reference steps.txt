@@ -19,3 +19,32 @@ B) Set-ExecutionPolicy Restricted
 ==========================================================
 ==========================================================
 pip install Flask
+
+==========================================================
+==========================================================
+1. Base python program
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+	
+@app.route("/")
+def index():
+
+	return render_template('try1.html')
+
+if __name__ == "__main__":
+   app.run(host='192.168.137.1', port=80, debug=True)
+   
+==========================================================
+==========================================================
+2. create a folder name templates and static in root folder
+
+3. put the html file inside templates
+
+4. put the css file inside static
+
+5. add the css link in html file in the below pattern
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
