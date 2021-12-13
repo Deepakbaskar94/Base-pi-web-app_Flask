@@ -1,0 +1,129 @@
+==========================================================
+1. Creating virtual Environment
+
+
+mkdir btre_project
+py -3 -m venv .venv
+.venv\scripts\activate   (if popping error)
+
+(open terminal in admin and type)
+A) Set-ExecutionPolicy RemoteSigned
+(.venv\scripts\activate) type in vs code
+
+command to exit venv = deactivate
+
+B) Set-ExecutionPolicy Restricted
+
+
+==========================================================
+==========================================================
+pip install Flask
+
+=========================================================
+==========================================================
+1. Base python program
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+	
+@app.route("/")
+def index():
+
+	return render_template('try1.html')
+
+if __name__ == "__main__":
+   app.run(host='192.168.137.1', port=80, debug=True)
+   
+==========================================================
+==========================================================
+2. create a folder name templates and static in root folder
+
+3. put the html file inside templates
+
+4. put the css file inside static
+
+5. add the css link in html file in the below pattern
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+==========================================================
+==========================================================
+
+href to move to a new page
+
+1. HTML CODE:
+
+      <div class="inputbox">
+        <a href="/num1" class="button">submit</a>
+      </div>
+
+2. PYTHON CODE:
+
+@app.route("/num1")
+def action():
+    return render_template('try2.html')
+
+==========================================================
+==========================================================
+
+Complete form submission with one click to send all data
+
+1. HTML CODE:
+
+    <form action = "{{ url_for('login') }}" method = "POST">   // API is important and it should be in python file
+      <div class="inputbox">
+        <input type="text" required="required" Name = "FN" />     //name is important and it should be unique
+        <span>First Name</span>
+      </div>
+      <div class="inputbox">
+        <input type="text" required="required" Name = "LN" />     //name is important and it should be unique
+        <span>Last Name</span>
+      </div>
+      <div class="inputbox">
+        <p><input type = "submit" value = "submit" /></p>	 //type is important and it should be unique
+      </div>
+    </form>
+
+2. PYTHON CODE: TO CALL ANOTHER API BY REDIRECTING AND TO RENDER
+
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+   if request.method == 'POST':
+      user = request.form['LN']
+      user1 = request.form['FN']
+      user = int(user)
+      user1 = int(user1)
+      user = user + user1
+      user = str(user)
+      return redirect (url_for('success',name = user))	#to call another API with parameters
+
+   else:
+      user = request.args.get('FN')
+	
+      return render_template("try4.html", output=user) #to render a new or existing html page with output data
+
+
+@app.route('/success/<name>')      #output of login API will call this API
+def success(name):
+   return 'welcome %s' % name
+
+
+3. FOR THE ABOVE GET METHOD RENDERING NEW HTML PAGE WITH DATA
+
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="center">
+    <h1>Calculate</h1>
+      <div class="inputbox">
+          <p>{{ output }}<p>
+      </div>
+  </div>
+</body>
+</html>
+
+==========================================================
+==========================================================
