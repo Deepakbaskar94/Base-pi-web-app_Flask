@@ -127,3 +127,39 @@ def success(name):
 
 ==========================================================
 ==========================================================
+
+Json update (read, write)
+
+1. import json
+2. create dictionary
+
+d = { }
+
+
+3. adding key and values according to requirement
+
+      d["user"]= user
+      d["user1"]= user1
+      d["user2"]= user2
+      d["user3"]= user3
+
+4. dumping the value inside the json file
+
+      j = open("new.json", "w")  #j is the variable which write on json
+      json.dump(d, j)      #d is dictionary where we have data 
+      j.close()
+      print("json close")
+
+5. to read the value from json file
+
+      j = open("new.json", "r")
+      d = json.load(j)
+      j.close()
+
+      readed = d.get("user")
+      print(readed)
+
+==========================================================
+==========================================================
+
+
